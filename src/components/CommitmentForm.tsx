@@ -6,10 +6,13 @@ export const CommitmentForm: React.FC = () => {
   const [stakeholder, setStakeholder] = useState('');
   const [datetime, setDatetime] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    setSuccess(false);
 
     const lowerPromise = promise.toLowerCase();
     if (
@@ -21,11 +24,30 @@ export const CommitmentForm: React.FC = () => {
       return;
     }
 
-    // Simulate successful submission
-    alert('Commitment successfully logged!');
-    setPromise('');
-    setStakeholder('');
-    setDatetime('');
+    setIsLoading(true);
+
+    try {
+      const response = await fetch('/api/commitments', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ promise, stakeholder, datetime }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit commitment');
+      }
+
+      setSuccess(true);
+      setPromise('');
+      setStakeholder('');
+      setDatetime('');
+    } catch (err: any) {
+      setError(err.message || 'An error occurred');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -76,8 +98,14 @@ export const CommitmentForm: React.FC = () => {
           </div>
         )}
 
-        <button type="submit" style={{ padding: '0.75rem', backgroundColor: '#007bff', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
-          Submit Commitment
+        {success && (
+          <div style={{ color: 'green', fontWeight: 'bold', padding: '0.5rem', border: '1px solid green', backgroundColor: '#e6ffe6' }}>
+            Commitment successfully logged!
+          </div>
+        )}
+
+        <button type="submit" disabled={isLoading} style={{ padding: '0.75rem', backgroundColor: isLoading ? '#ccc' : '#007bff', color: 'white', border: 'none', borderRadius: '4px', cursor: isLoading ? 'not-allowed' : 'pointer' }}>
+          {isLoading ? 'Analyzing Promise...' : 'Submit Commitment'}
         </button>
       </form>
     </div>
