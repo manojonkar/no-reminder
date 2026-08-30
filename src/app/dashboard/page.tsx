@@ -1,5 +1,7 @@
 import React from 'react';
 import { CommitmentForm } from '@/components/CommitmentForm';
+import { GhostwriterEscalation } from '@/components/GhostwriterEscalation';
+import { AIDraftReview } from '@/components/AIDraftReview';
 
 export default function Dashboard() {
   return (
@@ -23,6 +25,11 @@ export default function Dashboard() {
               <CommitmentForm />
             </div>
 
+            {/* AI Draft Review */}
+            <div className="bg-white/5 border border-white/10 rounded-xl p-6 mb-6 hover:border-[#D4AF37]/50 transition-colors">
+              <AIDraftReview />
+            </div>
+
             {/* Active Promises */}
             <div className="bg-white/5 border border-white/10 rounded-xl p-6 mb-6 hover:border-[#D4AF37]/50 transition-colors">
               <h3 className="text-xl font-medium mb-4">Active Promises</h3>
@@ -34,26 +41,21 @@ export default function Dashboard() {
                   </div>
                   <span className="text-sm px-3 py-1 bg-[#D4AF37]/20 text-[#D4AF37] rounded-full">In 2 hours</span>
                 </li>
-                <li className="flex items-start justify-between p-4 bg-black/20 rounded-lg border-l-4 border-[#D4AF37]">
-                  <div>
-                    <h4 className="font-medium text-lg">Review Vendor Contract</h4>
-                    <p className="text-sm text-gray-400 mt-1">Promised to Legal Team</p>
-                  </div>
-                  <span className="text-sm px-3 py-1 bg-white/10 text-gray-300 rounded-full">Tomorrow</span>
-                </li>
               </ul>
             </div>
 
-            {/* At-Risk Warnings */}
+            {/* At-Risk Warnings & Ghostwriter Escalation */}
             <div className="bg-white/5 border border-red-500/30 rounded-xl p-6 hover:border-red-500/60 transition-colors relative overflow-hidden">
               <div className="absolute top-0 left-0 w-1 h-full bg-red-500"></div>
               <h3 className="text-xl font-medium mb-4 flex items-center gap-2">
                 <span className="text-red-400">⚠️</span> At-Risk Warnings
               </h3>
-              <div className="p-4 bg-red-500/10 rounded-lg border border-red-500/20">
+              <div className="mb-4 p-4 bg-red-500/10 rounded-lg border border-red-500/20">
                 <h4 className="font-medium text-red-200">Prepare Board Slides</h4>
                 <p className="text-sm text-red-300/80 mt-1">Due in 30 minutes. Status: Not started.</p>
               </div>
+              
+              <GhostwriterEscalation />
             </div>
           </div>
         </section>
