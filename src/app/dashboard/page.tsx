@@ -1,124 +1,104 @@
 import React from 'react';
+import { CommitmentForm } from '@/components/CommitmentForm';
 
-export default function DashboardPage() {
+export default function Dashboard() {
   return (
-    <main id="main-content" tabIndex={-1} className="min-h-screen bg-[#0A192F] text-white p-8 font-sans">
-      <div className="max-w-6xl mx-auto">
-        
-        {/* Dashboard header */}
-        <div className="flex justify-between items-center mb-12 border-b border-slate-700 pb-6">
-          <div>
-            <h1 className="text-3xl font-bold font-serif text-[#D4AF37]">NFR Executive Dashboard</h1>
-            <p className="text-[#8892B0] mt-2 text-sm">Exception-Based Reporting (Zero Follow-up Required)</p>
-          </div>
-          <div className="flex gap-4">
-            <button className="bg-[#D4AF37] text-[#0A192F] px-5 py-2 rounded-lg font-bold hover:opacity-90 transition shadow-md">
-              Voice Dictation (Mic)
-            </button>
-          </div>
-        </div>
+    <div className="min-h-screen bg-[#0A192F] text-white p-8 font-sans">
+      <header className="mb-12">
+        <h1 className="text-4xl font-bold text-[#D4AF37] mb-2">Dashboard</h1>
+        <p className="text-gray-400">Welcome back. Stay on top of your execution and transformation.</p>
+      </header>
 
-        {/* Bento Box Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          
-          {/* Main Action Area (Exceptions) */}
-          <div className="md:col-span-2 space-y-6">
-            <h2 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
-              <span className="bg-red-500 w-3 h-3 rounded-full inline-block animate-pulse"></span>
-              Requires Your Attention (Exceptions)
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        {/* Left Side: Execution Hub */}
+        <section className="flex flex-col gap-8">
+          <div>
+            <h2 className="text-2xl font-semibold text-[#D4AF37] mb-6 flex items-center gap-3">
+              <span className="w-8 h-8 rounded-full bg-[#D4AF37] text-[#0A192F] flex items-center justify-center text-sm">1</span>
+              Execution Hub
             </h2>
             
-            {/* Escalation Card 1 */}
-            <div className="bg-white/5 border border-red-500/30 p-6 rounded-xl shadow-lg relative overflow-hidden">
+            {/* Log a Commitment */}
+            <div className="bg-white/5 border border-white/10 rounded-xl p-6 mb-6 hover:border-[#D4AF37]/50 transition-colors">
+              <CommitmentForm />
+            </div>
+
+            {/* Active Promises */}
+            <div className="bg-white/5 border border-white/10 rounded-xl p-6 mb-6 hover:border-[#D4AF37]/50 transition-colors">
+              <h3 className="text-xl font-medium mb-4">Active Promises</h3>
+              <ul className="space-y-4">
+                <li className="flex items-start justify-between p-4 bg-black/20 rounded-lg border-l-4 border-[#D4AF37]">
+                  <div>
+                    <h4 className="font-medium text-lg">Send Q3 Financial Report</h4>
+                    <p className="text-sm text-gray-400 mt-1">Promised to Sarah Jenkins</p>
+                  </div>
+                  <span className="text-sm px-3 py-1 bg-[#D4AF37]/20 text-[#D4AF37] rounded-full">In 2 hours</span>
+                </li>
+                <li className="flex items-start justify-between p-4 bg-black/20 rounded-lg border-l-4 border-[#D4AF37]">
+                  <div>
+                    <h4 className="font-medium text-lg">Review Vendor Contract</h4>
+                    <p className="text-sm text-gray-400 mt-1">Promised to Legal Team</p>
+                  </div>
+                  <span className="text-sm px-3 py-1 bg-white/10 text-gray-300 rounded-full">Tomorrow</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* At-Risk Warnings */}
+            <div className="bg-white/5 border border-red-500/30 rounded-xl p-6 hover:border-red-500/60 transition-colors relative overflow-hidden">
               <div className="absolute top-0 left-0 w-1 h-full bg-red-500"></div>
-              <div className="flex justify-between items-start mb-4">
-                <div>
-                  <h3 className="text-lg font-bold text-white">Q3 Financial Projections Delayed</h3>
-                  <p className="text-sm text-[#8892B0]">Assignee: Sarah Jenkins (Finance)</p>
+              <h3 className="text-xl font-medium mb-4 flex items-center gap-2">
+                <span className="text-red-400">⚠️</span> At-Risk Warnings
+              </h3>
+              <div className="p-4 bg-red-500/10 rounded-lg border border-red-500/20">
+                <h4 className="font-medium text-red-200">Prepare Board Slides</h4>
+                <p className="text-sm text-red-300/80 mt-1">Due in 30 minutes. Status: Not started.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Right Side: Transformation Journey */}
+        <section className="flex flex-col gap-8">
+          <div>
+            <h2 className="text-2xl font-semibold text-[#D4AF37] mb-6 flex items-center gap-3">
+              <span className="w-8 h-8 rounded-full bg-[#D4AF37] text-[#0A192F] flex items-center justify-center text-sm">2</span>
+              Transformation Journey
+            </h2>
+
+            {/* Next Learning Module */}
+            <div className="bg-white/5 border border-white/10 rounded-xl p-6 mb-6 hover:border-[#D4AF37]/50 transition-colors">
+              <h3 className="text-xl font-medium mb-4">Next Learning Module</h3>
+              <div className="relative h-48 rounded-lg overflow-hidden bg-gradient-to-br from-[#0A192F] to-[#1a2f52] border border-white/10 flex flex-col justify-end p-6">
+                <div className="absolute top-4 right-4 px-3 py-1 bg-[#D4AF37] text-[#0A192F] text-xs font-bold rounded-full uppercase tracking-wider">
+                  Module 4
                 </div>
-                <span className="bg-red-500/20 text-red-400 text-xs font-bold px-3 py-1 rounded-full border border-red-500/20">
-                  Blocked
+                <h4 className="text-2xl font-bold text-white mb-2">The Art of the Immediate No</h4>
+                <p className="text-gray-300 text-sm mb-4">Learn how to protect your time gracefully and stop making false promises.</p>
+                <div className="w-full bg-white/20 rounded-full h-2 mb-1">
+                  <div className="bg-[#D4AF37] h-2 rounded-full" style={{ width: '45%' }}></div>
+                </div>
+                <span className="text-xs text-gray-400 text-right w-full">45% Completed</span>
+              </div>
+            </div>
+
+            {/* Live Follow-up Tax Widget */}
+            <div className="bg-gradient-to-br from-[#112240] to-[#0A192F] border border-[#D4AF37]/30 rounded-xl p-6 relative overflow-hidden">
+              <div className="absolute -right-10 -top-10 w-40 h-40 bg-[#D4AF37]/10 rounded-full blur-3xl"></div>
+              <h3 className="text-xl font-medium mb-2">Live Follow-up Tax™</h3>
+              <p className="text-sm text-gray-400 mb-6">The hidden cost of unfulfilled commitments this week.</p>
+              
+              <div className="flex items-end gap-4 mb-2">
+                <span className="text-5xl font-bold text-[#D4AF37]">4.5<span className="text-3xl text-gray-400">hrs</span></span>
+                <span className="text-sm text-red-400 mb-2 flex items-center gap-1">
+                  ↑ 1.2 hrs vs last week
                 </span>
               </div>
-              
-              <div className="bg-black/20 p-4 rounded-lg mb-6 border border-white/5">
-                <p className="text-sm text-gray-300">
-                  <strong className="text-white">BLUF (Bottom Line Up Front):</strong> Sarah is blocked because the APAC data hasn't been submitted by the regional team. 
-                </p>
-              </div>
-
-              <div className="bg-[#D4AF37]/10 p-5 rounded-lg border border-[#D4AF37]/30">
-                <p className="text-sm font-bold text-[#D4AF37] mb-2">✨ AI Proposed Solution:</p>
-                <p className="text-sm text-white mb-4">Push the board review to next Tuesday and automatically escalate the data request to the VP of APAC.</p>
-                <div className="flex gap-3">
-                  <button className="bg-[#D4AF37] text-[#0A192F] px-4 py-2 rounded-md font-bold text-sm hover:opacity-90">
-                    Approve Solution ✓
-                  </button>
-                  <button className="bg-transparent border border-[#8892B0] text-[#8892B0] px-4 py-2 rounded-md font-bold text-sm hover:bg-white/5">
-                    Modify
-                  </button>
-                </div>
-              </div>
+              <p className="text-sm text-gray-300">Time wasted tracking down and apologizing for delays.</p>
             </div>
-
-            {/* Escalation Card 2 */}
-            <div className="bg-white/5 border border-yellow-500/30 p-6 rounded-xl shadow-lg relative overflow-hidden">
-              <div className="absolute top-0 left-0 w-1 h-full bg-yellow-500"></div>
-              <div className="flex justify-between items-start mb-4">
-                <div>
-                  <h3 className="text-lg font-bold text-white">Website Redesign Assets</h3>
-                  <p className="text-sm text-[#8892B0]">Assignee: Marketing Agency</p>
-                </div>
-                <span className="bg-yellow-500/20 text-yellow-400 text-xs font-bold px-3 py-1 rounded-full border border-yellow-500/20">
-                  At Risk
-                </span>
-              </div>
-              
-              <div className="bg-[#D4AF37]/10 p-5 rounded-lg border border-[#D4AF37]/30 mt-4">
-                <p className="text-sm font-bold text-[#D4AF37] mb-2">✨ AI Proposed Solution:</p>
-                <p className="text-sm text-white mb-4">Release an additional $500 from the buffer budget for emergency freelance help to hit the Friday deadline.</p>
-                <div className="flex gap-3">
-                  <button className="bg-[#D4AF37] text-[#0A192F] px-4 py-2 rounded-md font-bold text-sm hover:opacity-90">
-                    Authorize Budget ✓
-                  </button>
-                </div>
-              </div>
-            </div>
-
           </div>
-
-          {/* Right Column: Auto-Tracked Items */}
-          <div className="md:col-span-1 space-y-6">
-            
-            <div className="bg-white/5 border border-green-500/20 p-8 rounded-xl shadow-md text-center">
-              <div className="text-5xl font-serif text-green-400 mb-2">42</div>
-              <h2 className="text-lg font-bold text-white">Tasks On Track</h2>
-              <p className="text-xs text-[#8892B0] mt-2">NFR AI is automatically collecting status updates for these. No action needed.</p>
-              <button className="text-xs text-[#D4AF37] underline mt-4 hover:text-white">View list (Not Recommended)</button>
-            </div>
-
-            <div className="bg-white/5 border border-white/10 p-6 rounded-xl shadow-md">
-              <h2 className="text-lg font-bold text-white mb-4 border-b border-white/10 pb-2">Passively Extracted</h2>
-              <p className="text-xs text-[#8892B0] mb-4">The AI automatically parsed these from your Slack and Zoom meetings today:</p>
-              
-              <div className="space-y-4">
-                <div className="bg-black/30 p-3 rounded-lg border border-white/5">
-                  <div className="text-xs text-gray-400 mb-1">From: Zoom Call (10:00 AM)</div>
-                  <div className="text-sm text-white">"John will send the updated contracts by EOD Wednesday."</div>
-                  <div className="text-xs text-green-400 mt-2 font-bold">✓ Logged & Tracking John</div>
-                </div>
-                
-                <div className="bg-black/30 p-3 rounded-lg border border-white/5">
-                  <div className="text-xs text-gray-400 mb-1">From: Slack #leadership</div>
-                  <div className="text-sm text-white">"I'll have the deck ready for review tomorrow morning." (You)</div>
-                  <div className="text-xs text-blue-400 mt-2 font-bold">✓ Added to your To-Do</div>
-                </div>
-              </div>
-            </div>
-            
-          </div>
-        </div>
+        </section>
       </div>
-    </main>
+    </div>
   );
 }
