@@ -100,20 +100,7 @@ export default function Dashboard() {
               </div>
             </div>
 
-            {/* Live Follow-up Tax Widget */}
-            <div className="bg-gradient-to-br from-[#112240] to-[#0A192F] border border-[#D4AF37]/30 rounded-xl p-6 relative overflow-hidden mb-6">
-              <div className="absolute -right-10 -top-10 w-40 h-40 bg-[#D4AF37]/10 rounded-full blur-3xl"></div>
-              <h3 className="text-xl font-medium mb-2">Live Follow-up Tax™</h3>
-              <p className="text-sm text-gray-400 mb-6">The hidden cost of unfulfilled commitments this week.</p>
-              
-              <div className="flex items-end gap-4 mb-2">
-                <span className="text-5xl font-bold text-[#D4AF37]">4.5<span className="text-3xl text-gray-400">hrs</span></span>
-                <span className="text-sm text-red-400 mb-2 flex items-center gap-1">
-                  ↑ 1.2 hrs vs last week
-                </span>
-              </div>
-              <p className="text-sm text-gray-300">Time wasted tracking down and apologizing for delays.</p>
-            </div>
+
 
             {/* Enterprise Reliability Scoreboard */}
             <h2 className="text-2xl font-semibold text-[#D4AF37] mb-6 flex items-center gap-3 mt-8">
