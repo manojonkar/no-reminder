@@ -1,10 +1,10 @@
 import React from 'react';
 import { CommitmentForm } from '@/components/CommitmentForm';
 import { GhostwriterEscalation } from '@/components/GhostwriterEscalation';
-import { AIDraftReview } from '@/components/AIDraftReview';
-import { IntegrationsPanel } from '@/components/IntegrationsPanel';
-import { PeerReviewWidget } from '@/components/PeerReviewWidget';
-import { ReliabilityScoreboard } from '@/components/ReliabilityScoreboard';
+import AIDraftReview from '@/components/AIDraftReview';
+import IntegrationsPanel from '@/components/IntegrationsPanel';
+import PeerReviewWidget from '@/components/PeerReviewWidget';
+import ReliabilityScoreboard from '@/components/ReliabilityScoreboard';
 
 export default function Dashboard() {
   return (

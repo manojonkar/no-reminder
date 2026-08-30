@@ -1,0 +1,16 @@
+
+> webapp@0.1.0 build
+> next build
+
+▲ Next.js 16.3.3 (Turbopack)
+✓ Running next.config.ts took 106ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 2.4s
+  Running TypeScript ...
+src/app/dashboard/page.tsx(4,10): error TS2614: Module '"@/components/AIDraftReview"' has no exported member 'AIDraftReview'. Did you mean to use 'import AIDraftReview from "@/components/AIDraftReview"' instead?
+src/app/dashboard/page.tsx(5,10): error TS2614: Module '"@/components/IntegrationsPanel"' has no exported member 'IntegrationsPanel'. Did you mean to use 'import IntegrationsPanel from "@/components/IntegrationsPanel"' instead?
+src/app/dashboard/page.tsx(6,10): error TS2614: Module '"@/components/PeerReviewWidget"' has no exported member 'PeerReviewWidget'. Did you mean to use 'import PeerReviewWidget from "@/components/PeerReviewWidget"' instead?
+src/app/dashboard/page.tsx(7,10): error TS2614: Module '"@/components/ReliabilityScoreboard"' has no exported member 'ReliabilityScoreboard'. Did you mean to use 'import ReliabilityScoreboard from "@/components/ReliabilityScoreboard"' instead?
+Failed to type check.
+
