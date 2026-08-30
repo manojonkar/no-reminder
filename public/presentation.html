@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>No Reminder - Explainer Presentation</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600&display=swap');
+
+        :root {
+            --midnight-navy: #0A192F;
+            --slate-grey: #8892B0;
+            --champagne-gold: #D4AF37;
+            --crisp-white: #E6F1FF;
+            --alert-red: #FF4B4B;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--midnight-navy);
+            color: var(--crisp-white);
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .scene {
+            position: absolute;
+            width: 80%;
+            max-width: 1000px;
+            height: 80%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 1.2s ease-in-out;
+            pointer-events: none;
+        }
+
+        .scene.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: var(--champagne-gold);
+        }
+
+        p.voiceover {
+            font-size: 1.5rem;
+            color: var(--slate-grey);
+            max-width: 800px;
+            line-height: 1.6;
+            margin-top: 50px;
+            font-weight: 300;
+        }
+
+        .ui-element {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            transform: translateY(30px);
+            opacity: 0;
+            transition: all 1s ease-out;
+        }
+
+        .scene.active .ui-element {
+            transform: translateY(0);
+            opacity: 1;
+            transition-delay: 0.8s;
+        }
+        
+        .scene.active .ui-element:nth-child(3) {
+            transition-delay: 1.5s;
+        }
+
+        .highlight {
+            color: var(--crisp-white);
+            font-weight: 600;
+        }
+        
+        .alert {
+            color: var(--alert-red);
+            font-weight: 600;
+        }
+
+        .btn {
+            background-color: var(--champagne-gold);
+            color: var(--midnight-navy);
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 1.2rem;
+        }
+
+        #progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 6px;
+            background-color: var(--champagne-gold);
+            width: 0%;
+            transition: width linear;
+        }
+
+        .clock {
+            font-size: 6rem;
+            font-family: monospace;
+            color: var(--alert-red);
+            margin: 20px 0;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="progress-bar"></div>
+
+    <!-- Scene 1 -->
+    <div class="scene" id="scene-1">
+        <h1 style="color: var(--alert-red);">The Leadership Tax</h1>
+        <div class="clock">8 - 12 Hours / Week</div>
+        <div class="ui-element">
+            <i>"Did we get the Q3 report?"</i><br><br>
+            <i>"Just following up on this..."</i><br><br>
+            <i>"Checking in..."</i>
+        </div>
+        <p class="voiceover">"As a leader, you spend 8 to 12 hours every single week chasing down work. Following up. Reminding people. We call this the Leadership Tax."</p>
+    </div>
+
+    <!-- Scene 2 -->
+    <div class="scene" id="scene-2">
+        <h1>Zero Friction</h1>
+        <div class="ui-element" style="border-left: 4px solid var(--champagne-gold); text-align: left;">
+            <div style="font-size: 0.9rem; color: var(--slate-grey); margin-bottom: 10px;">AI Meeting Integration</div>
+            <span class="highlight">"Sarah, I need the Q3 financial projection by Thursday."</span>
+        </div>
+        <div class="ui-element" style="background: rgba(212, 175, 55, 0.1); border-color: var(--champagne-gold);">
+            ✨ Commitment Logged & Assigned to Sarah for Thursday.
+        </div>
+        <p class="voiceover">"What if you never had to follow up again? Our AI passively listens to your meetings and Slack channels, automatically logging commitments without you lifting a finger."</p>
+    </div>
+
+    <!-- Scene 3 -->
+    <div class="scene" id="scene-3">
+        <h1>The Autonomous Project Manager</h1>
+        <div class="ui-element" style="text-align: left; width: 450px;">
+            <div style="font-size: 0.9rem; color: var(--slate-grey); margin-bottom: 15px;">Automated Check-in (Wednesday)</div>
+            <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                <strong style="color: var(--champagne-gold);">NFR Bot:</strong> Hi Sarah, checking in on the Q3 Financial Projection due tomorrow. Are we on track?
+            </div>
+            <div style="background: rgba(212, 175, 55, 0.15); padding: 15px; border-radius: 8px; text-align: right;">
+                <strong>Sarah:</strong> On track!
+            </div>
+        </div>
+        <p class="voiceover">"The platform takes over as your autonomous project manager. It gently nudges your team before deadlines, making the AI the 'bad guy'—not you."</p>
+    </div>
+
+    <!-- Scene 4 -->
+    <div class="scene" id="scene-4">
+        <h1>The Bento Box Dashboard</h1>
+        <div style="display: flex; gap: 30px;">
+            <div class="ui-element" style="opacity: 0.15; flex: 1;">
+                On Track<br><br><span style="font-size: 2rem;">42 Tasks</span>
+            </div>
+            <div class="ui-element" style="border-color: var(--alert-red); flex: 1;">
+                <span class="alert">Requires Attention</span><br><br>
+                Marketing Assets Delayed
+            </div>
+        </div>
+        <p class="voiceover">"When you check your dashboard, you won't see a chaotic list. Through Exception-Based reporting, you only see what's broken, delayed, or blocked."</p>
+    </div>
+
+    <!-- Scene 5 -->
+    <div class="scene" id="scene-5">
+        <h1>Smart Early Escalation</h1>
+        <div class="ui-element" style="text-align: center;">
+            <span class="alert" style="font-size: 1.5rem;">Marketing Assets Delayed</span>
+            <hr style="border-color: rgba(255,255,255,0.1); margin: 30px 0;">
+            <div style="text-align: left; margin-bottom: 30px;">
+                <strong style="color: var(--champagne-gold);">AI Proposed Solution:</strong><br><br>
+                Extend deadline to Friday and allocate budget for freelance help.
+            </div>
+            <div class="btn">Approve Solution ✓</div>
+        </div>
+        <p class="voiceover">"When things go off track, the system doesn't just hand you a problem. It presents a proposed solution. You click 'Approve,' turning a 20-minute meeting into a 5-second decision."</p>
+    </div>
+
+    <!-- Scene 6 -->
+    <div class="scene" id="scene-6">
+        <h1 style="font-size: 5rem;">Lead at scale.</h1>
+        <h1 style="font-size: 3rem; color: var(--crisp-white);">Never follow up again.</h1>
+        <p class="voiceover" style="margin-top: 80px;">"Reclaim your week. Create a culture of high accountability without micromanagement."</p>
+    </div>
+
+    <script>
+        const scenes = document.querySelectorAll('.scene');
+        const progressBar = document.getElementById('progress-bar');
+        const sceneDuration = 7000; // 7 seconds per scene
+        let currentScene = 0;
+
+        function showScene(index) {
+            scenes.forEach(s => s.classList.remove('active'));
+            if(scenes[index]) {
+                scenes[index].classList.add('active');
+            }
+        }
+
+        function playPresentation() {
+            showScene(currentScene);
+            
+            // Animate progress bar for this scene
+            progressBar.style.transition = 'none';
+            progressBar.style.width = '0%';
+            
+            setTimeout(() => {
+                progressBar.style.transition = `width ${sceneDuration}ms linear`;
+                progressBar.style.width = '100%';
+            }, 50);
+
+            currentScene++;
+
+            if (currentScene < scenes.length) {
+                setTimeout(playPresentation, sceneDuration);
+            }
+        }
+
+        // Start presentation after 1.5 second delay
+        setTimeout(playPresentation, 1500);
+    </script>
+</body>
+</html>
