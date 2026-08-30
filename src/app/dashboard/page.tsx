@@ -2,6 +2,9 @@ import React from 'react';
 import { CommitmentForm } from '@/components/CommitmentForm';
 import { GhostwriterEscalation } from '@/components/GhostwriterEscalation';
 import { AIDraftReview } from '@/components/AIDraftReview';
+import { IntegrationsPanel } from '@/components/IntegrationsPanel';
+import { PeerReviewWidget } from '@/components/PeerReviewWidget';
+import { ReliabilityScoreboard } from '@/components/ReliabilityScoreboard';
 
 export default function Dashboard() {
   return (
@@ -45,7 +48,7 @@ export default function Dashboard() {
             </div>
 
             {/* At-Risk Warnings & Ghostwriter Escalation */}
-            <div className="bg-white/5 border border-red-500/30 rounded-xl p-6 hover:border-red-500/60 transition-colors relative overflow-hidden">
+            <div className="bg-white/5 border border-red-500/30 rounded-xl p-6 hover:border-red-500/60 transition-colors relative overflow-hidden mb-6">
               <div className="absolute top-0 left-0 w-1 h-full bg-red-500"></div>
               <h3 className="text-xl font-medium mb-4 flex items-center gap-2">
                 <span className="text-red-400">⚠️</span> At-Risk Warnings
@@ -57,6 +60,14 @@ export default function Dashboard() {
               
               <GhostwriterEscalation />
             </div>
+
+            {/* Integrations & Settings */}
+            <h2 className="text-2xl font-semibold text-[#D4AF37] mb-6 flex items-center gap-3 mt-8">
+              <span className="w-8 h-8 rounded-full bg-[#D4AF37] text-[#0A192F] flex items-center justify-center text-sm">⚙️</span>
+              Passive Capture Integrations
+            </h2>
+            <IntegrationsPanel />
+
           </div>
         </section>
 
@@ -67,6 +78,11 @@ export default function Dashboard() {
               <span className="w-8 h-8 rounded-full bg-[#D4AF37] text-[#0A192F] flex items-center justify-center text-sm">2</span>
               Transformation Journey
             </h2>
+            
+            {/* Monthly 360 Certification */}
+            <div className="mb-6">
+              <PeerReviewWidget />
+            </div>
 
             {/* Next Learning Module */}
             <div className="bg-white/5 border border-white/10 rounded-xl p-6 mb-6 hover:border-[#D4AF37]/50 transition-colors">
@@ -85,7 +101,7 @@ export default function Dashboard() {
             </div>
 
             {/* Live Follow-up Tax Widget */}
-            <div className="bg-gradient-to-br from-[#112240] to-[#0A192F] border border-[#D4AF37]/30 rounded-xl p-6 relative overflow-hidden">
+            <div className="bg-gradient-to-br from-[#112240] to-[#0A192F] border border-[#D4AF37]/30 rounded-xl p-6 relative overflow-hidden mb-6">
               <div className="absolute -right-10 -top-10 w-40 h-40 bg-[#D4AF37]/10 rounded-full blur-3xl"></div>
               <h3 className="text-xl font-medium mb-2">Live Follow-up Tax™</h3>
               <p className="text-sm text-gray-400 mb-6">The hidden cost of unfulfilled commitments this week.</p>
@@ -98,6 +114,14 @@ export default function Dashboard() {
               </div>
               <p className="text-sm text-gray-300">Time wasted tracking down and apologizing for delays.</p>
             </div>
+
+            {/* Enterprise Reliability Scoreboard */}
+            <h2 className="text-2xl font-semibold text-[#D4AF37] mb-6 flex items-center gap-3 mt-8">
+              <span className="w-8 h-8 rounded-full bg-[#D4AF37] text-[#0A192F] flex items-center justify-center text-sm">3</span>
+              Enterprise View
+            </h2>
+            <ReliabilityScoreboard />
+
           </div>
         </section>
       </div>
