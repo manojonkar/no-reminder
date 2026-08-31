@@ -33,6 +33,26 @@ export default function VoiceInterface() {
           
           recognition.onend = () => {
             setIsListening(false);
+            if (transcript && transcript !== "Listening for your promise...") {
+              try {
+                // Save to localStorage so it appears in the Draft Inbox
+                const existing = JSON.parse(localStorage.getItem('nfr_drafts') || '[]');
+                const newDraft = {
+                  id: Date.now().toString(),
+                  promise: transcript,
+                  stakeholder: "TBD (AI Parsing)",
+                  datetime: "",
+                  source: "Voice Assistant",
+                  weight: null,
+                  isVague: true // Defaults to vague to show the AI coach
+                };
+                localStorage.setItem('nfr_drafts', JSON.stringify([newDraft, ...existing]));
+                
+                setTranscript("Promise saved to your Draft Inbox! ✓");
+              } catch (e) {
+                console.error("Could not save to localStorage");
+              }
+            }
           };
           
           recognition.start();

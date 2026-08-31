@@ -1,6 +1,5 @@
 "use client";
-import React, { useState } from "react";
-import Image from "next/image";
+import React, { useState, useEffect } from "react";
 import GlobalHeader from "@/components/GlobalHeader";
 
 interface DraftPromise {
@@ -35,14 +34,40 @@ const mockDrafts: DraftPromise[] = [
 ];
 
 export default function DraftInbox() {
-  const [drafts, setDrafts] = useState<DraftPromise[]>(mockDrafts);
+  const [drafts, setDrafts] = useState<DraftPromise[]>([]);
   const [selectedWeight, setSelectedWeight] = useState<{ [key: string]: "H" | "M" | "L" }>({});
   
+  // Track which items are in edit mode
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editPromise, setEditPromise] = useState("");
+  const [editStakeholder, setEditStakeholder] = useState("");
+
   // Manual entry modal states
   const [isManualModalOpen, setIsManualModalOpen] = useState(false);
   const [manualPromise, setManualPromise] = useState("");
   const [manualStakeholder, setManualStakeholder] = useState("");
   const [manualSource, setManualSource] = useState("WhatsApp");
+
+  // Load drafts from localStorage on mount
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('nfr_drafts');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        setDrafts([...parsed, ...mockDrafts]);
+      } else {
+        setDrafts(mockDrafts);
+      }
+    } catch (e) {
+      setDrafts(mockDrafts);
+    }
+  }, []);
+
+  const saveToLocalStorage = (newDrafts: DraftPromise[]) => {
+    // Only save items that came from Voice or Manual (not the hardcoded mock ones for the demo)
+    const toSave = newDrafts.filter(d => d.source === "Voice Assistant" || d.source === "WhatsApp" || d.source === "In-Person Meeting" || d.source === "Phone Call" || d.source === "Text Message" || d.source === "Other");
+    localStorage.setItem('nfr_drafts', JSON.stringify(toSave));
+  };
 
   const handleWeightSelect = (id: string, weight: "H" | "M" | "L") => {
     setSelectedWeight({ ...selectedWeight, [id]: weight });
@@ -53,11 +78,15 @@ export default function DraftInbox() {
       alert("Please select a weight (H/M/L) before approving.");
       return;
     }
-    setDrafts(drafts.filter(d => d.id !== id));
+    const newDrafts = drafts.filter(d => d.id !== id);
+    setDrafts(newDrafts);
+    saveToLocalStorage(newDrafts);
   };
 
   const handleDelete = (id: string) => {
-    setDrafts(drafts.filter(d => d.id !== id));
+    const newDrafts = drafts.filter(d => d.id !== id);
+    setDrafts(newDrafts);
+    saveToLocalStorage(newDrafts);
   };
   
   const handleManualSubmit = () => {
@@ -66,16 +95,37 @@ export default function DraftInbox() {
       id: Date.now().toString(),
       promise: manualPromise,
       stakeholder: manualStakeholder,
-      datetime: "", // intentionally vague for AI coach demo
+      datetime: "",
       source: manualSource,
       weight: null,
-      isVague: true // Defaults to vague to show AI Coach
+      isVague: true
     };
-    setDrafts([newDraft, ...drafts]);
+    const newDrafts = [newDraft, ...drafts];
+    setDrafts(newDrafts);
+    saveToLocalStorage(newDrafts);
+    
     setIsManualModalOpen(false);
     setManualPromise("");
     setManualStakeholder("");
     setManualSource("WhatsApp");
+  };
+
+  const startEditing = (draft: DraftPromise) => {
+    setEditingId(draft.id);
+    setEditPromise(draft.promise);
+    setEditStakeholder(draft.stakeholder);
+  };
+
+  const saveEdit = (id: string) => {
+    const newDrafts = drafts.map(d => {
+      if (d.id === id) {
+        return { ...d, promise: editPromise, stakeholder: editStakeholder };
+      }
+      return d;
+    });
+    setDrafts(newDrafts);
+    saveToLocalStorage(newDrafts);
+    setEditingId(null);
   };
 
   return (
@@ -142,11 +192,38 @@ export default function DraftInbox() {
                   </div>
                 )}
                 <div className="flex justify-between items-start mb-6">
-                  <div>
-                    <h2 className="text-2xl font-medium mb-2">{draft.promise}</h2>
-                    <p className="text-gray-500">To: {draft.stakeholder} • Captured from {draft.source}</p>
-                  </div>
+                  {editingId === draft.id ? (
+                    <div className="flex-grow mr-6 space-y-3">
+                      <input 
+                        type="text" 
+                        value={editPromise} 
+                        onChange={e => setEditPromise(e.target.value)} 
+                        className="w-full p-2 bg-gray-50 border border-gray-200 rounded outline-none focus:border-[#D4AF37] text-xl font-medium text-[#0A192F]" 
+                      />
+                      <div className="flex items-center gap-2">
+                        <span className="text-gray-500 text-sm">To:</span>
+                        <input 
+                          type="text" 
+                          value={editStakeholder} 
+                          onChange={e => setEditStakeholder(e.target.value)} 
+                          className="p-1 bg-gray-50 border border-gray-200 rounded outline-none focus:border-[#D4AF37] text-sm text-[#0A192F]" 
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    <div>
+                      <h2 className="text-2xl font-medium mb-2">{draft.promise}</h2>
+                      <p className="text-gray-500">To: {draft.stakeholder} • Captured from {draft.source}</p>
+                    </div>
+                  )}
+
+                  {editingId === draft.id ? (
+                    <button onClick={() => saveEdit(draft.id)} className="px-4 py-2 bg-[#0A192F] text-[#D4AF37] text-sm font-bold rounded-lg shadow-sm whitespace-nowrap">Save</button>
+                  ) : (
+                    <button onClick={() => startEditing(draft)} className="px-4 py-2 bg-gray-100 text-gray-600 hover:bg-gray-200 text-sm font-bold rounded-lg transition whitespace-nowrap">Edit</button>
+                  )}
                 </div>
+                
                 <div className="flex flex-wrap items-end justify-between gap-6 border-t border-gray-100 pt-6">
                   <div className="flex flex-col gap-2">
                     <label className="text-xs font-bold text-gray-400 uppercase tracking-wider">Deadline</label>
