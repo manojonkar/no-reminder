@@ -47,7 +47,7 @@ export default function LandingPage() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
-            <button onClick={() => window.location.href = '/inbox'} className="px-8 py-4 bg-[#D4AF37] text-[#0A192F] font-bold text-lg rounded-lg hover:opacity-90 transition shadow-lg">
+            <button onClick={() => window.location.href = '/onboarding'} className="px-8 py-4 bg-[#D4AF37] text-[#0A192F] font-bold text-lg rounded-lg hover:opacity-90 transition shadow-lg">
               Start Free Trial
             </button>
             <button onClick={() => window.location.href = '/inbox'} className="px-8 py-4 bg-white/10 text-white font-bold text-lg rounded-lg hover:bg-white/20 transition">
