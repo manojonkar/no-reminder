@@ -43,7 +43,7 @@ export default function LandingPage() {
           </h1>
           
           <p className="text-lg md:text-xl text-gray-400 max-w-lg mb-12">
-            The NFR (No follow up required) framework is to KILL BUSYness in the organizations and move to being High Performance Leaders and High Performance Organizations. This portal is a commitment fulfillment support system.
+            The NFR (No Follow-Up Required) framework is to KILL BUSYness in the organizations and move to being High Performance Leaders and High Performance Organizations. This portal is a commitment fulfillment support system.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
