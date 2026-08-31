@@ -48,6 +48,12 @@ export default function GlobalHeader({ activeTab = 'none' }: HeaderProps) {
           Voice UI
         </a>
         <a 
+          href="/credential" 
+          className="hover:text-[#0A192F] transition pb-1"
+        >
+          Credential
+        </a>
+        <a 
           href="/settings" 
           className="hover:text-[#0A192F] transition pb-1"
         >
