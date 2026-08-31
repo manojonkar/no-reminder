@@ -1,3 +1,4 @@
+"use client";
 import React from 'react';
 import Image from 'next/image';
 
@@ -39,6 +40,18 @@ export default function GlobalHeader({ activeTab = 'none' }: HeaderProps) {
           className={`transition pb-1 ${activeTab === 'academy' ? 'text-[#0A192F] font-bold border-b-2 border-[#D4AF37]' : 'hover:text-[#0A192F]'}`}
         >
           Academy
+        </a>
+        <a 
+          href="/voice" 
+          className="hover:text-[#0A192F] transition pb-1"
+        >
+          Voice UI
+        </a>
+        <a 
+          href="/settings" 
+          className="hover:text-[#0A192F] transition pb-1"
+        >
+          Settings
         </a>
       </nav>
 
