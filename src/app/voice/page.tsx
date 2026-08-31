@@ -10,12 +10,40 @@ export default function VoiceInterface() {
   const toggleListening = () => {
     if (isListening) {
       setIsListening(false);
-      // In a real app, stop recording and process audio here
+      // We would stop the recognition here if we kept a ref to it
     } else {
       setIsListening(true);
-      setTranscript("Listening...");
-      // Simulate receiving transcript over time
-      setTimeout(() => setTranscript("I promise to review the Q3 financials by tomorrow..."), 2000);
+      setTranscript("Listening for your promise...");
+      
+      try {
+        // @ts-ignore
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (SpeechRecognition) {
+          const recognition = new SpeechRecognition();
+          recognition.continuous = false;
+          recognition.interimResults = true;
+          
+          recognition.onresult = (event: any) => {
+            let currentTranscript = "";
+            for (let i = event.resultIndex; i < event.results.length; ++i) {
+              currentTranscript += event.results[i][0].transcript;
+            }
+            setTranscript(currentTranscript);
+          };
+          
+          recognition.onend = () => {
+            setIsListening(false);
+          };
+          
+          recognition.start();
+        } else {
+          setTranscript("Speech recognition not supported in this browser. (Try Chrome or Safari)");
+          setTimeout(() => setIsListening(false), 3000);
+        }
+      } catch (err) {
+        setTranscript("Microphone access denied or error occurred.");
+        setTimeout(() => setIsListening(false), 2000);
+      }
     }
   };
 

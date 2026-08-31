@@ -30,21 +30,28 @@ export default function AcademyPage() {
           </div>
           
           <div className="grid md:grid-cols-2 gap-16 items-center">
-            <div className="aspect-video bg-gray-50 rounded-2xl flex items-center justify-center group cursor-pointer hover:bg-gray-100 transition-colors relative overflow-hidden">
-              <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-              <PlayCircle className="w-20 h-20 text-[#0A192F] opacity-80 group-hover:scale-110 transition-transform duration-500" strokeWidth={1} />
+            <div className="aspect-video rounded-2xl overflow-hidden shadow-xl bg-black">
+              <iframe 
+                width="100%" 
+                height="100%" 
+                src="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=0&controls=1&rel=0" 
+                title="Leadership & Follow-Up" 
+                frameBorder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowFullScreen
+              ></iframe>
             </div>
             <div className="space-y-6">
-              <h3 className="text-2xl font-medium">Identifying the Silent Leaks</h3>
+              <h3 className="text-2xl font-medium">The Leadership Tax Audit</h3>
               <p className="text-gray-500 leading-relaxed text-lg">
-                Discover the hidden costs of manual follow-ups. In this masterclass module, we break down the exact mathematical formula to calculate your team's lost productivity, and the automated framework to reclaim it.
+                Identify the silent leaks in your organization. Ask yourself: How much of your day is spent chasing others? How much of your team's day is spent waiting on you? In this masterclass module, we break down the exact mathematical formula to calculate your team's Leadership Tax, and the automated NFR framework to reclaim it.
               </p>
               <div className="flex gap-4 pt-4">
-                <button className="px-8 py-4 bg-[#0A192F] text-white rounded-full font-medium hover:bg-black transition-colors">
+                <button className="px-8 py-4 bg-[#0A192F] text-white rounded-xl shadow-md font-bold hover:bg-gray-800 transition-colors">
                   Resume Lesson
                 </button>
-                <button className="px-8 py-4 bg-white text-[#0A192F] border border-gray-200 rounded-full font-medium hover:border-gray-300 transition-colors">
-                  View Resources
+                <button className="px-8 py-4 bg-white text-[#0A192F] border border-gray-200 shadow-sm rounded-xl font-bold hover:border-gray-300 transition-colors">
+                  View Workbook
                 </button>
               </div>
             </div>
