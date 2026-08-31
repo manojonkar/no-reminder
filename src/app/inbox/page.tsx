@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
+import GlobalHeader from "@/components/GlobalHeader";
 
 interface DraftPromise {
   id: string;
@@ -55,17 +56,7 @@ export default function DraftInbox() {
 
   return (
     <div className="min-h-screen bg-[#FAFAFA] font-sans text-[#0A192F] flex flex-col">
-      <header className="px-12 py-10 flex justify-between items-center w-full max-w-5xl mx-auto">
-        <div className="flex items-center gap-4">
-          <Image src="/logo.jpg" alt="NFR Logo" width={32} height={32} className="rounded-md" />
-          <span className="font-serif text-xl font-bold tracking-tight text-[#0A192F]">NFR</span>
-        </div>
-        <nav className="text-sm font-medium flex gap-8 text-gray-500">
-          <a href="/inbox" className="text-[#0A192F] font-bold border-b-2 border-[#D4AF37] pb-1">Drafts</a>
-          <a href="/dashboard" className="hover:text-[#0A192F] transition pb-1">Heatmap</a>
-          <a href="/academy" className="hover:text-[#0A192F] transition pb-1">Academy</a>
-        </nav>
-      </header>
+      <GlobalHeader activeTab="drafts" />
 
       <main className="flex-grow w-full max-w-3xl mx-auto px-6 py-12">
         <h1 className="font-serif text-5xl font-bold mb-12 text-[#0A192F] tracking-tight">

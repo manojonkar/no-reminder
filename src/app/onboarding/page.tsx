@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
+import GlobalHeader from "@/components/GlobalHeader";
 
 export default function Onboarding() {
   const [name, setName] = useState("");
@@ -8,9 +9,11 @@ export default function Onboarding() {
   const [company, setCompany] = useState("");
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] font-sans text-[#0A192F] flex flex-col items-center justify-center p-6 py-16">
+    <div className="min-h-screen bg-[#FAFAFA] font-sans text-[#0A192F] flex flex-col">
+      <GlobalHeader activeTab="none" />
       
-      <div className="max-w-2xl w-full bg-white p-12 rounded-3xl shadow-xl border border-gray-100 flex flex-col items-center text-center">
+      <div className="flex-grow flex items-center justify-center p-6 py-12">
+        <div className="max-w-2xl w-full bg-white p-12 rounded-3xl shadow-xl border border-gray-100 flex flex-col items-center text-center">
         
         <Image src="/logo.jpg" alt="NFR Logo" width={64} height={64} className="rounded-xl mb-8 shadow-sm" />
         
