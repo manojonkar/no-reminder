@@ -7,6 +7,7 @@ export default function Onboarding() {
   const [name, setName] = useState("");
   const [title, setTitle] = useState("");
   const [company, setCompany] = useState("");
+  const [connected, setConnected] = useState(false);
 
   return (
     <div className="min-h-screen bg-[#FAFAFA] font-sans text-[#0A192F] flex flex-col">
@@ -22,7 +23,7 @@ export default function Onboarding() {
         </h1>
         
         <p className="text-gray-500 mb-10 text-lg">
-          Welcome to the No Follow-Up Required framework. You are entering your 2-Week Shadow Phase. Let's configure your Executive Boundaries.
+          Welcome to the No Follow-Up Required framework. Let's configure your Executive Boundaries to get started.
         </p>
         
         <div className="w-full space-y-6 text-left">
@@ -65,9 +66,15 @@ export default function Onboarding() {
               <h3 className="font-bold text-[#0A192F]">2. Connect Channels</h3>
               <p className="text-sm text-gray-500 max-w-xs mt-1">Authorize your preferred communication tools (Email, MS Teams, Slack, Google Workspace, CRM, etc.).</p>
             </div>
-            <button className="px-5 py-2.5 bg-[#0A192F] text-white text-sm font-bold rounded-lg hover:bg-gray-800 transition shadow-sm whitespace-nowrap">
-              Connect
-            </button>
+            {connected ? (
+              <button onClick={() => setConnected(false)} className="px-5 py-2.5 bg-emerald-100 text-emerald-700 text-sm font-bold rounded-lg hover:bg-emerald-200 transition shadow-sm whitespace-nowrap">
+                ✓ Connected
+              </button>
+            ) : (
+              <button onClick={() => setConnected(true)} className="px-5 py-2.5 bg-[#0A192F] text-white text-sm font-bold rounded-lg hover:bg-gray-800 transition shadow-sm whitespace-nowrap">
+                Connect
+              </button>
+            )}
           </div>
 
           {/* Step 3: Panel */}
@@ -99,7 +106,7 @@ export default function Onboarding() {
             CANCEL
           </button>
           <button onClick={() => window.location.href='/inbox'} className="px-8 py-3 bg-[#D4AF37] text-[#0A192F] text-sm font-bold rounded-lg hover:opacity-90 transition shadow-md">
-            START SHADOW PHASE
+            ACCESS PORTAL
           </button>
         </div>
 

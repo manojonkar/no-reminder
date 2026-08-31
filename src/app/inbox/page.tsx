@@ -37,6 +37,12 @@ const mockDrafts: DraftPromise[] = [
 export default function DraftInbox() {
   const [drafts, setDrafts] = useState<DraftPromise[]>(mockDrafts);
   const [selectedWeight, setSelectedWeight] = useState<{ [key: string]: "H" | "M" | "L" }>({});
+  
+  // Manual entry modal states
+  const [isManualModalOpen, setIsManualModalOpen] = useState(false);
+  const [manualPromise, setManualPromise] = useState("");
+  const [manualStakeholder, setManualStakeholder] = useState("");
+  const [manualSource, setManualSource] = useState("WhatsApp");
 
   const handleWeightSelect = (id: string, weight: "H" | "M" | "L") => {
     setSelectedWeight({ ...selectedWeight, [id]: weight });
@@ -53,16 +59,76 @@ export default function DraftInbox() {
   const handleDelete = (id: string) => {
     setDrafts(drafts.filter(d => d.id !== id));
   };
+  
+  const handleManualSubmit = () => {
+    if (!manualPromise || !manualStakeholder) return;
+    const newDraft: DraftPromise = {
+      id: Date.now().toString(),
+      promise: manualPromise,
+      stakeholder: manualStakeholder,
+      datetime: "", // intentionally vague for AI coach demo
+      source: manualSource,
+      weight: null,
+      isVague: true // Defaults to vague to show AI Coach
+    };
+    setDrafts([newDraft, ...drafts]);
+    setIsManualModalOpen(false);
+    setManualPromise("");
+    setManualStakeholder("");
+    setManualSource("WhatsApp");
+  };
 
   return (
     <div className="min-h-screen bg-[#FAFAFA] font-sans text-[#0A192F] flex flex-col">
       <GlobalHeader activeTab="drafts" />
 
-      <main className="flex-grow w-full max-w-3xl mx-auto px-6 py-12">
-        <h1 className="font-serif text-5xl font-bold mb-12 text-[#0A192F] tracking-tight">
-          Good Morning.<br />
-          <span className="text-gray-400 font-normal">You have {drafts.length} drafts.</span>
-        </h1>
+      <main className="flex-grow w-full max-w-3xl mx-auto px-6 py-12 relative">
+        <div className="flex justify-between items-end mb-12">
+          <h1 className="font-serif text-5xl font-bold text-[#0A192F] tracking-tight">
+            Good Morning.<br />
+            <span className="text-gray-400 font-normal">You have {drafts.length} drafts.</span>
+          </h1>
+          <button 
+            onClick={() => setIsManualModalOpen(true)}
+            className="px-6 py-3 bg-[#0A192F] text-white font-bold rounded-lg hover:bg-gray-800 transition shadow-md whitespace-nowrap mb-2"
+          >
+            + Log Offline Promise
+          </button>
+        </div>
+
+        {isManualModalOpen && (
+          <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
+            <div className="bg-white p-8 rounded-3xl max-w-md w-full shadow-2xl flex flex-col gap-4">
+              <h2 className="text-2xl font-bold font-serif mb-2 text-[#0A192F]">Log Manual Promise</h2>
+              
+              <div>
+                <label className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1 block">What did you promise?</label>
+                <input type="text" value={manualPromise} onChange={e => setManualPromise(e.target.value)} className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg outline-none focus:border-[#D4AF37]" placeholder="e.g. I will send the finalized budget..." />
+              </div>
+
+              <div>
+                <label className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1 block">To whom?</label>
+                <input type="text" value={manualStakeholder} onChange={e => setManualStakeholder(e.target.value)} className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg outline-none focus:border-[#D4AF37]" placeholder="Name / Team" />
+              </div>
+
+              <div>
+                <label className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1 block">Source</label>
+                <select value={manualSource} onChange={e => setManualSource(e.target.value)} className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg outline-none focus:border-[#D4AF37]">
+                  <option value="WhatsApp">WhatsApp</option>
+                  <option value="In-Person">In-Person Meeting</option>
+                  <option value="Phone Call">Phone Call</option>
+                  <option value="Text Message">Text Message</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div className="flex gap-4 mt-4">
+                <button onClick={() => setIsManualModalOpen(false)} className="flex-1 py-3 text-sm font-bold text-gray-500 hover:bg-gray-50 rounded-lg transition">Cancel</button>
+                <button onClick={handleManualSubmit} className="flex-1 py-3 bg-[#D4AF37] text-[#0A192F] text-sm font-bold rounded-lg shadow-sm hover:opacity-90 transition">Save to Inbox</button>
+              </div>
+            </div>
+          </div>
+        )}
 
         <div className="space-y-8">
           {drafts.length === 0 ? (
