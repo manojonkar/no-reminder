@@ -13,10 +13,18 @@ export default function AcademyPage() {
           <p className="text-[#D4AF37] font-semibold tracking-[0.2em] uppercase text-sm">
             NFR Academy
           </p>
-          <h1 className="text-5xl md:text-7xl font-light tracking-tight text-[#0A192F]">
-            Master the art of <br />
-            <span className="font-semibold italic">Kill BUSYness.</span>
-          </h1>
+          <div className="flex flex-col items-center justify-center space-y-8">
+            <div className="w-48 h-48 md:w-64 md:h-64 relative rounded-full overflow-hidden shadow-2xl border-4 border-[#D4AF37] bg-white">
+              <img 
+                src="/kill-busyness-lion.jpg" 
+                alt="KILL BUSYness Lion Emblem" 
+                className="object-cover w-full h-full"
+              />
+            </div>
+            <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-[#0A192F]">
+              KILL BUSYness
+            </h1>
+          </div>
           <p className="text-xl md:text-2xl text-gray-500 font-light max-w-2xl mx-auto leading-relaxed">
             Premium educational curriculum designed to permanently eliminate administrative friction from your workflow.
           </p>
